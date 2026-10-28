@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Synopsis - Hierarchical Multi-Agent AI System for Elevator Dispatching</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 1.0cm 1.2cm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      background-color: #f1f5f9;
+      line-height: 1.32;
+      font-size: 9pt;
+      margin: 0;
+      padding: 20px;
+    }
+    .page-sheet {
+      background: #ffffff;
+      max-width: 210mm;
+      margin: 0 auto 25px auto;
+      padding: 26px 32px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-radius: 4px;
+      position: relative;
+    }
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+      }
+      .page-sheet {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+        page-break-after: always;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+    .header-block {
+      text-align: center;
+      border-bottom: 2px solid #1e3a8a;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+    .header-dept {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-sub {
+      font-size: 8.8pt;
+      font-weight: 600;
+      color: #2563eb;
+      margin-top: 1px;
+    }
+    .title-box {
+      margin: 6px 0;
+      font-size: 11.5pt;
+      font-weight: 800;
+      color: #1e3a8a;
+      line-height: 1.25;
+      text-align: center;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 10px;
+      background: #f1f5f9;
+      border-left: 4px solid #2563eb;
+      padding: 6px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      font-size: 8.2pt;
+    }
+    .meta-col strong {
+      color: #0f172a;
+    }
+    .meta-col ul {
+      margin: 2px 0 0 0;
+      padding-left: 14px;
+    }
+    h2 {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #1e3a8a;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 2px;
+      margin: 8px 0 3px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    p {
+      margin: 0 0 5px 0;
+      text-align: justify;
+    }
+    .img-container {
+      text-align: center;
+      margin: 6px 0 8px 0;
+    }
+    .img-container img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .caption {
+      font-size: 7.5pt;
+      font-style: italic;
+      color: #475569;
+      margin-top: 2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 5px 0 6px 0;
+      font-size: 7.8pt;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 3px 5px;
+      vertical-align: top;
+    }
+    th {
+      background: #1e3a8a;
+      color: #ffffff;
+      font-weight: 600;
+      text-align: left;
+    }
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    .badge {
+      display: inline-block;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 7.2pt;
+      font-weight: 600;
+    }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-green { background: #dcfce7; color: #166534; }
+    .footer-note {
+      text-align: center;
+      font-size: 7.5pt;
+      color: #64748b;
+      margin-top: 8px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 3px;
+    }
+    .print-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #1e3a8a;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      cursor: pointer;
+      border: none;
+      z-index: 999;
+    }
+    .print-btn:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+  <!-- PAGE 1 -->
+  <div class="page-sheet">
+    <div class="header-block">
+      <div class="header-dept">Department of Computer Science & Engineering</div>
+      <div class="header-sub">PROJECT SYNOPSIS — CAPSTONE / MAJOR PROJECT (B.TECH / M.TECH)</div>
+    </div>
+
+    <div class="title-box">
+      Design and Simulation of a Hierarchical Multi-Agent AI System for Intelligent Group Elevator Dispatching in Multi-Zone High-Rise Buildings
+    </div>
+
+    <div class="meta-grid">
+      <div class="meta-col">
+        <strong>Project Team Members:</strong>
+        <ul>
+          <li><strong>Divyanshu Yadav</strong> – <em>Lead Researcher & System Architect</em></li>
+          <li><strong>Viraj & Co-developer</strong> – <em>Core Algorithm & Simulation Engineering</em></li>
+          <li><strong>Vaibhav</strong> – <em>Documentation, Technical Writing & Quality Assurance</em></li>
+        </ul>
+      </div>
+      <div class="meta-col">
+        <strong>Supervision & Methodology:</strong>
+        <ul>
+          <li><strong>Supervisor:</strong> <em>[Dr. / Prof. / Faculty Guide]</em></li>
+          <li><strong>AI Paradigm:</strong> Hierarchical Multi-Agent RL (MAPPO) + Kinematics</li>
+          <li><strong>Platform:</strong> Python 3.10+, PyTorch, SimPy, Pygame</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>1. Introduction & Motivation</h2>
+    <p>
+      In modern high-rise infrastructures, vertical transportation accounts for <strong>5% to 15% of total building electrical energy</strong> and represents a severe operational bottleneck. Conventional Elevator Group Control Systems (EGCS) rely almost exclusively on static heuristics (e.g., Nearest Car/ETA, Full Collective, or LOOK/SCAN). These rigid rule sets fail under stochastic non-stationary surges—specifically morning <strong>Up-Peak</strong>, evening <strong>Down-Peak</strong>, and lunchtime <strong>Inter-Floor</strong> travel. Furthermore, static heuristics suffer from <em>elevator bunching</em> (cars shadowing one another along the same trajectory, starving other floors) and cannot anticipate demand under partial observability. This project develops a <strong>Hierarchical Multi-Agent System (H-MAS)</strong> combined with <strong>Multi-Agent Reinforcement Learning (MARL / MAPPO)</strong> and proactive idle parking to minimize passenger wait times, journey times, and empty car travel.
+    </p>
+
+    <h2>2. Problem Statement & Mathematical Formulation</h2>
+    <p>
+      Given an $N$-floor building serviced by $M$ independent elevator cars under a standard <strong>Two-Button Hall Call Interface</strong> ($\text{UP} / \text{DOWN}$):
+      (1) <em>Partial Observability:</em> When a hall call is registered, the passenger's destination floor remains strictly hidden until boarding.
+      (2) <em>Multi-Objective Optimization:</em> $\min_{\pi} \left[ w_1 \text{AWT} + w_2 \text{AJT} + w_3 \text{Starvation} + w_4 \text{EnergyIndex} \right]$, balancing wait times, transit delays, starvation caps, and motor energy wear.
+    </p>
+
+    <h2>3. Proposed Hierarchical Multi-Agent Architecture (H-MAS)</h2>
+    <p>
+      The architecture decouples global call dispatching from local kinematic motion planning:
+      <strong>Tier 1 (Global Dispatcher):</strong> Maintains global state tensor $S_t$ (positions, velocities, loads $\rho_m = p_m / P_{\max}$, hall queues); runs MAPPO / Centralized Critic + ETA Cost Allocator and Proactive Idle-Car Parking.
+      <strong>Tier 2 (Autonomous Car Agents):</strong> Operates localized 7-State Kinematic FSMs, managing internal destination calls, dynamic LOOK sweeps, and adaptive door dwell times.
+    </p>
+
+    <!-- Figure 1: Architecture Diagram -->
+    <div class="img-container">
+      <img src="architecture_h_mas.png" alt="Hierarchical Multi-Agent Architecture">
+      <div class="caption">Figure 1: Hierarchical Multi-Agent Architecture (H-MAS) with Tier-1 Global Dispatcher and Tier-2 Autonomous Car Agents</div>
+    </div>
+
+    <div class="footer-note">Page 1 of 2 — Department of Computer Science & Engineering</div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page-sheet page-break">
+    <div class="header-block">
+      <div class="header-dept">Department of Computer Science & Engineering</div>
+      <div class="header-sub">PROJECT SYNOPSIS — CAPSTONE / MAJOR PROJECT (CONTINUED)</div>
+    </div>
+
+    <h2>4. System Workflow: End-to-End Operational Lifecycle</h2>
+    <p>
+      The complete operational cycle proceeds from passenger hall-call generation, global state evaluation, MARL dispatch, kinematic travel, passenger boarding/destination input, to delivery and proactive idle repositioning:
+    </p>
+
+    <!-- Figure 2: Workflow Diagram -->
+    <div class="img-container">
+      <img src="architecture_workflow.png" alt="End-to-End Operational Workflow">
+      <div class="caption">Figure 2: End-to-End Operational Lifecycle and Dispatch Workflow</div>
+    </div>
+
+    <!-- Figure 3: FSM Diagram -->
+    <div class="img-container">
+      <img src="architecture_fsm.png" alt="Car Agent 7-State FSM">
+      <div class="caption">Figure 3: Car Agent 7-State Kinematic Finite State Machine (FSM) Transition Model</div>
+    </div>
+
+    <h2>5. Simulation Engine, Pygame Visualizer & Benchmarking</h2>
+    <p>
+      • <strong>Traffic Profiles:</strong> Simulates Poisson arrival flows under Up-Peak (80% lobby to upper), Down-Peak (80% upper to lobby), and Inter-Floor (uniform pairs).<br>
+      • <strong>Pygame 2D Graphical Dashboard:</strong> Features real-time animated elevator shafts, cabin coordinates, waiting floor queues, capacity gauges, and streaming telemetry HUD (AWT, AJT, energy index). Supports scalable building configurations ($N = 10 \text{ to } 30+$ floors, $M = 2 \text{ to } 8$ cars).<br>
+      • <strong>Expected Targets vs. Baselines (LOOK / Full Collective):</strong> 20%–30% lower AWT, 15%–25% lower AJT, zero starvation ($\text{Max Wait} &lt; 180\text{s}$), and 15% lower energy wear.
+    </p>
+
+    <h2>6. Implementation Roadmap & Milestones</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:14%;">Phase</th>
+          <th style="width:48%;">Key Deliverables / Milestones</th>
+          <th style="width:18%;">Timeline</th>
+          <th style="width:20%;">Lead</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Phase 1</strong></td>
+          <td>Kinematic modeling, FSM state formulation, formal synopsis approval</td>
+          <td>Weeks 1 – 2</td>
+          <td>Divyanshu & Team</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 2</strong></td>
+          <td>SimPy discrete-event core, Poisson generators, baseline heuristics (LOOK/Collective)</td>
+          <td>Weeks 3 – 5</td>
+          <td>Viraj & Co-developer</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 3</strong></td>
+          <td>Tier-1 MARL Coordinator (MAPPO), Tier-2 FSM, and Proactive Parking Policy</td>
+          <td>Weeks 6 – 8</td>
+          <td>Divyanshu & Viraj</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 4</strong></td>
+          <td>Pygame 2D visual dashboard, live HUD telemetry, and stress benchmarking</td>
+          <td>Weeks 9 – 12</td>
+          <td>Vaibhav & Team</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer-note">Page 2 of 2 — Department of Computer Science & Engineering</div>
+  </div>
+
+</body>
+</html>

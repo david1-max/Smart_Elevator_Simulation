@@ -1,0 +1,97 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\setlist{nosep, leftmargin=*}
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{4pt}{2pt}
+
+\title{\vspace{-1.5cm}\textbf{\Large Project Synopsis: Design and Simulation of a Hierarchical Multi-Agent AI System for Intelligent Group Elevator Dispatching in Multi-Zone High-Rise Buildings}}
+
+\author{
+\textbf{Divyanshu Yadav} (Lead Researcher \& System Architect) \quad
+\textbf{Viraj} (Core Algorithm \& Simulation) \\
+\textbf{Vaibhav} (Documentation \& QA) \quad
+\textit{Supervisor: [Faculty Guide Name]} \\
+Department of Computer Science \& Engineering
+}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-1.2cm}
+
+\section{Introduction \& Motivation}
+In modern high-rise infrastructures, vertical transportation accounts for 5\%--15\% of total building electrical energy and acts as a severe traffic bottleneck during peak hours. Conventional Elevator Group Control Systems (EGCS) rely heavily on static, rule-based dispatching heuristics (e.g., Nearest Car, Full Collective, or LOOK/SCAN). 
+
+While computationally simple, these static algorithms fail to handle stochastic, non-stationary passenger flows—specifically \textbf{Up-Peak} (morning ground-to-office rush), \textbf{Down-Peak} (evening exit surge), and \textbf{Inter-Floor} (lunchtime peer-to-peer travel). Crucially, static rules suffer from \textit{elevator bunching} (cars shadowing one another along the same trajectory, starving other floors) and cannot anticipate demand under partial observability (destinations unknown at the hall button). This project develops a Hierarchical Multi-Agent System (H-MAS) combined with Reinforcement Learning (RL) and predictive idle-car positioning to dynamically minimize passenger wait times, journey times, and energy consumption.
+
+\section{Problem Formulation}
+Consider an $N$-floor building serviced by $M$ identical elevator cars ($C_1, \dots, C_M$) with capacity $P_{\max}$. The system uses a standard \textbf{Two-Button Hall Call Interface} ($\text{UP}/\text{DOWN}$):
+\begin{enumerate}
+    \item \textbf{Partial Observability:} At hall call registration $h_k = (f_k, d_k, t_k^{\text{call}})$, destination floor $f_k^{\text{dest}}$ and passenger count remain strictly unknown until passenger boarding.
+    \item \textbf{Multi-Objective Optimization:} We minimize the composite objective:
+    $$\min_{\pi} \left[ w_1 \text{AWT} + w_2 \text{AJT} + w_3 \text{Starvation} + w_4 \text{EnergyIndex} \right]$$
+    where Average Waiting Time ($\text{AWT} = \frac{1}{|P|}\sum (t^{\text{board}} - t^{\text{call}})$), Average Journey Time ($\text{AJT} = \frac{1}{|P|}\sum (t^{\text{exit}} - t^{\text{board}})$), Starvation is the maximum individual wait time, and Energy is total floor traversals and directional reversals.
+\end{enumerate}
+
+\section{Proposed System Architecture}
+The system decouples macro-level dispatching from micro-level motion control via a two-tier hierarchy:
+
+\subsection{Tier 1: Global Dispatcher Agent (Macro Level)}
+\begin{itemize}
+    \item \textbf{Global State Tensor ($S_t$):} Monitors active hall call matrices, car positions, velocities ($v_m \in \{-1, 0, 1\}$), loads ($\rho_m = p_m/P_{\max}$), and current traffic mode.
+    \item \textbf{Dispatch Policy:} Uses Deep Q-Networks (DQN) / augmented Estimated Time of Arrival (ETA) with load-saturation penalty to assign each hall call to exactly one car agent.
+    \item \textbf{Proactive Parking Policy:} Directs idle cars to predicted high-traffic floors (e.g., ground floor during Up-Peak) before calls materialize.
+\end{itemize}
+
+\subsection{Tier 2: Car Agents (Micro Level - One per Elevator)}
+\begin{itemize}
+    \item \textbf{7-State Kinematic FSM:} Governs state flow: $\text{IDLE} \rightarrow \text{ACCEL} \rightarrow \text{CRUISE} \rightarrow \text{DECEL} \rightarrow \text{DOOR\_OPEN} \rightarrow \text{SERVICING} \rightarrow \text{DOOR\_CLOSE}$.
+    \item \textbf{Dynamic LOOK Policy:} Merges assigned external calls with onboard passenger destination calls, executing direction-preserving sweeps while dynamically varying door dwell time to prevent car clustering.
+\end{itemize}
+
+\section{System Workflow \& Operational Lifecycle}
+\begin{enumerate}
+    \item \textbf{Call Generation:} Passenger arrives at floor $i$ and pushes UP/DOWN button.
+    \item \textbf{Central Evaluation:} Tier 1 evaluates fleet state $S_t$ and assigns call to optimal car $C_m$.
+    \item \textbf{Local Motion:} $C_m$ adjusts its stop schedule and executes physical kinematic motion.
+    \item \textbf{Boarding \& Destination Input:} Door opens at floor $i$; passenger boards and registers destination floor. Wait time is logged.
+    \item \textbf{Transit \& Exit:} Car delivers passenger to destination floor. Journey time is logged.
+    \item \textbf{Idle Repositioning:} If no pending calls remain, car reverts to IDLE and is repositioned via the proactive parking policy.
+\end{enumerate}
+
+\section{Simulation Engine \& Pygame Dashboard}
+\begin{itemize}
+    \item \textbf{Backend Simulator:} Event-driven loop (SimPy/Python) simulating kinematics ($v_{\max} = 2.5\text{ m/s}$, $a = 1.0\text{ m/s}^2$), door dwell, and Poisson arrivals under 3 canonical traffic modes: Up-Peak, Down-Peak, and Inter-Floor.
+    \item \textbf{Pygame Dashboard:} Interactive 2D visualization rendering real-time elevator shafts, cabin coordinates, waiting floor queues, capacity gauges, and live telemetry graphs for AWT, AJT, and energy indices.
+\end{itemize}
+
+\section{Benchmarking \& Expected Deliverables}
+The proposed agent is quantitatively benchmarked against Full Collective, Nearest Car (Simple ETA), and LOOK/SCAN heuristics under identical traffic seeds.
+\textbf{Target Improvements:}
+\begin{itemize}
+    \item $20\%$--$30\%$ reduction in Average Waiting Time (AWT).
+    \item $15\%$--$25\%$ reduction in Average Journey Time (AJT).
+    \item Elimination of starvation ($\text{Max Wait} < 180\text{ s}$).
+    \item $15\%$ reduction in redundant floor traversals and directional reversals.
+\end{itemize}
+
+\section{Tools \& Work Breakdown}
+\textbf{Tech Stack:} Python 3.10+, PyTorch, NumPy, SimPy, Pygame, Matplotlib.
+\begin{itemize}
+    \item \textbf{Phase 1 (W1-2):} Kinematic modeling, formal state/action definitions.
+    \item \textbf{Phase 2 (W3-5):} Discrete-event simulation core and baseline heuristics.
+    \item \textbf{Phase 3 (W6-8):} Tier-1 RL dispatching and Tier-2 FSM integration.
+    \item \textbf{Phase 4 (W9-10):} Pygame 2D visual dashboard and live HUD.
+    \item \textbf{Phase 5 (W11-12):} Benchmarking, statistical verification, and final thesis report.
+\end{itemize}
+
+\end{document}

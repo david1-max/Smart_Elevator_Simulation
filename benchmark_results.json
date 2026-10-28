@@ -1,0 +1,50 @@
+[
+  {
+    "dispatcher": "Nearest Car (Simple ETA Heuristic)",
+    "sim_time": 240.0,
+    "traffic_mode": "Up-Peak (Morning Lobby Surge)",
+    "total_generated": 127,
+    "total_completed": 7,
+    "active_waiting": 106,
+    "active_in_transit": 14,
+    "awt": 1.8571428571428572,
+    "ajt": 35.857142857142854,
+    "max_wait_time": 224.0,
+    "total_travel_meters": 146.94999999999987,
+    "total_door_cycles": 127,
+    "total_reversals": 0,
+    "energy_index": 484.39999999999975
+  },
+  {
+    "dispatcher": "Directional LOOK / Full Collective",
+    "sim_time": 240.0,
+    "traffic_mode": "Up-Peak (Morning Lobby Surge)",
+    "total_generated": 127,
+    "total_completed": 8,
+    "active_waiting": 104,
+    "active_in_transit": 15,
+    "awt": 3.9375,
+    "ajt": 34.625,
+    "max_wait_time": 224.0,
+    "total_travel_meters": 204.4999999999998,
+    "total_door_cycles": 121,
+    "total_reversals": 1,
+    "energy_index": 593.4999999999995
+  },
+  {
+    "dispatcher": "Hierarchical Multi-Agent AI (H-MAS + Proactive Parking)",
+    "sim_time": 240.0,
+    "traffic_mode": "Up-Peak (Morning Lobby Surge)",
+    "total_generated": 127,
+    "total_completed": 43,
+    "active_waiting": 65,
+    "active_in_transit": 19,
+    "awt": 30.709302325581394,
+    "ajt": 55.77906976744186,
+    "max_wait_time": 141.0,
+    "total_travel_meters": 529.7000000000003,
+    "total_door_cycles": 74,
+    "total_reversals": 7,
+    "energy_index": 1191.4000000000005
+  }
+]
